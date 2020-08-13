@@ -131,7 +131,17 @@ for c in pairs(games) do
         while not wehaveouranswer do
             tex.print(printgames[i])
             if games[c][i][significantbit] == 1 then
-                tex.print("heap " .. i .. " will do.")
+                newheap = nimsum({nimsumbits,games[c][i]})
+                
+                newheapamount = 0
+                for j = 0,#newheap do
+                    if newheap[j+1] == 1 then
+                        newheapamount = newheapamount + 2^j
+                    end
+                end
+                newheapamount = math.ceil(newheapamount)
+                tex.print("Change heap " .. i .. " from " .. printgames[c][i] .. " to " .. newheapamount)
+                
                 wehaveouranswer = true
             end
             i = i + 1
