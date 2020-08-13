@@ -39,6 +39,23 @@ function biggestheap(game)
     return biggest
 end
 
+-- calculates Nim sum
+function nimsum(game)
+    biggest = biggestheap(game)
+    
+    nimsumbits = {}
+    for i = 1,biggest do
+        thisbittotal = 0
+        for k,v in pairs(game) do
+            if v[i] ~= nil then
+                thisbittotal = thisbittotal + v[i]
+            end
+        end
+        nimsumbits[i] = math.fmod(thisbittotal,2)
+    end
+    return nimsumbits
+end
+
 -- generate some questions
 games = {}
 printgames = {}
