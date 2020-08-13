@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{luacode}
+\usepackage{nimsticks}
+
+\title{Nim --- next move?}
+\author{Peter Rowlett}
+\date{August 2020}
+
+\begin{document}
+
+\begin{luacode*}
+-- settings
+min_heaps = 3
+max_heaps = 5
+min_sticks = 1
+max_sticks = 10
+num_games = 5
+
+tex.print("\\begin{enumerate}")
+for i = 1, num_games do
+    tex.print("\\item What is the optimal next move in the following game of Nim?")
+    thisgame = {}
+    numheaps = math.random(min_heaps,max_heaps)
+    
+    tex.print("\\nimgame{")
+    for heap = 1, numheaps do
+        thisgame[heap] = math.random(min_sticks,max_sticks)
+        tex.print(thisgame[heap])
+        if heap < numheaps then
+            tex.print(",")
+        end
+    end
+    tex.print("}")
+end
+tex.print("\\end{enumerate}")
+
+\end{luacode*}
+
+
+\end{document}
+
+
