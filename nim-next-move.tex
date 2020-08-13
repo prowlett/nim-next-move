@@ -81,7 +81,39 @@ end
 tex.print("\\end{enumerate}")
 
 
-
+-- calculate some answers
+tex.print("\\section*{Answers}")
+tex.print("\\begin{enumerate}")
+for c in pairs(games) do
+    tex.print("\\item Nim piles:")
+    for heap in pairs(games[c]) do
+        tex.sprint(printgames[c][heap] .. " (")
+        thisheap = games[c][heap]
+        for i = #thisheap,1,-1 do
+            tex.sprint(thisheap[i])
+        end
+        tex.sprint(") ")
+    end
+    tex.sprint("\\\\")
+    tex.print("Biggest heap has ".. biggestheap(games[c]) .. " bits\\\\")
+    nimsumbits = nimsum(games[c])
+    
+    -- test if nimsum is zero
+    iszero = true
+    for k,v in pairs(nimsumbits) do
+        if v == 1 then
+            iszero = false
+        end
+    end
+    
+    -- Declare if we can win
+    if iszero then
+        tex.print("Nim sum is zero. There is no optimal move, you lose.")
+    else
+        tex.print("Nim sum is not zero.")
+    end
+end
+tex.print("\\end{enumerate}")
 
 
 \end{luacode*}
