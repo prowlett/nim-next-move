@@ -126,6 +126,17 @@ for c in pairs(games) do
         end
         tex.print("Significant bit is ".. significantbit.."\\\\")
         
+        wehaveouranswer = false
+        i = 1
+        while not wehaveouranswer do
+            tex.print(printgames[i])
+            if games[c][i][significantbit] == 1 then
+                tex.print("heap " .. i .. " will do.")
+                wehaveouranswer = true
+            end
+            i = i + 1
+        end
+        
     end
 end
 tex.print("\\end{enumerate}")
