@@ -110,7 +110,15 @@ for c in pairs(games) do
     if iszero then
         tex.print("Nim sum is zero. There is no optimal move, you lose.")
     else
-        tex.print("Nim sum is not zero.")
+        tex.print("Nim sum is not zero, it is ")
+        significantbit = #nimsumbits+1
+        i=#nimsumbits
+        for i = #nimsumbits,1,-1 do
+            tex.sprint(nimsumbits[i])
+        end
+        tex.sprint(".\\\\")
+        
+        
     end
 end
 tex.print("\\end{enumerate}")
