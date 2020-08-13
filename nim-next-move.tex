@@ -14,7 +14,7 @@ min_heaps = 3
 max_heaps = 5
 min_sticks = 1
 max_sticks = 10
-num_games = 1
+num_games = 6
 
 
 -- converts nim heap number of sticks to binary
@@ -85,17 +85,10 @@ tex.print("\\end{enumerate}")
 tex.print("\\section*{Answers}")
 tex.print("\\begin{enumerate}")
 for c in pairs(games) do
-    tex.print("\\item Nim piles:")
+    tex.print("\\item ")
     for heap in pairs(games[c]) do
-        tex.sprint(printgames[c][heap] .. " (")
         thisheap = games[c][heap]
-        for i = #thisheap,1,-1 do
-            tex.sprint(thisheap[i])
-        end
-        tex.sprint(") ")
     end
-    tex.sprint("\\\\")
-    tex.print("Biggest heap has ".. biggestheap(games[c]) .. " bits\\\\")
     nimsumbits = nimsum(games[c])
     
     -- test if nimsum is zero
@@ -108,28 +101,22 @@ for c in pairs(games) do
     
     -- Declare if we can win
     if iszero then
-        tex.print("Nim sum is zero. There is no optimal move, you lose.")
+        tex.print("Nim sum is zero. There is no optimal move, the next player loses.")
     else
-        tex.print("Nim sum is not zero, it is ")
+        tex.print("Nim sum is not zero. ")
+
         significantbit = #nimsumbits+1
-        i=#nimsumbits
-        for i = #nimsumbits,1,-1 do
-            tex.sprint(nimsumbits[i])
-        end
-        tex.sprint(".\\\\")
-        
+        i = #nimsumbits
         while significantbit > #nimsumbits do
             if nimsumbits[i]==1 then
                 significantbit = i
             end
             i = i - 1
         end
-        tex.print("Significant bit is ".. significantbit.."\\\\")
         
         wehaveouranswer = false
         i = 1
         while not wehaveouranswer do
-            tex.print(printgames[i])
             if games[c][i][significantbit] == 1 then
                 newheap = nimsum({nimsumbits,games[c][i]})
                 
