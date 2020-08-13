@@ -118,6 +118,13 @@ for c in pairs(games) do
         end
         tex.sprint(".\\\\")
         
+        while significantbit > #nimsumbits do
+            if nimsumbits[i]==1 then
+                significantbit = i
+            end
+            i = i - 1
+        end
+        tex.print("Significant bit is ".. significantbit.."\\\\")
         
     end
 end
