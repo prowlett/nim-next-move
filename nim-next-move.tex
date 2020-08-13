@@ -16,23 +16,56 @@ min_sticks = 1
 max_sticks = 10
 num_games = 5
 
+
+-- converts nim heap number of sticks to binary
+function nimtobin(heap) 
+    bits = {}
+    while heap>0 do
+        rem = math.ceil(math.fmod(heap,2))
+        bits[#bits+1] = rem
+        heap = (heap-rem)/2
+    end
+    return bits
+end
+
+-- generate some questions
+games = {}
+tex.print("\\section*{Questions}")
 tex.print("\\begin{enumerate}")
 for i = 1, num_games do
     tex.print("\\item What is the optimal next move in the following game of Nim?")
-    thisgame = {}
+    games[i] = {}
     numheaps = math.random(min_heaps,max_heaps)
     
-    tex.print("\\nimgame{")
+    tex.sprint("\\nimgame{")
     for heap = 1, numheaps do
-        thisgame[heap] = math.random(min_sticks,max_sticks)
-        tex.print(thisgame[heap])
+        games[i][heap] = math.random(min_sticks,max_sticks)
+        tex.print(games[i][heap])
         if heap < numheaps then
-            tex.print(",")
+            tex.sprint(",")
         end
     end
-    tex.print("}")
+    tex.sprint("}")
 end
 tex.print("\\end{enumerate}")
+
+
+-- calculate some answers
+tex.print("\\section*{Answers}")
+tex.print("\\begin{enumerate}")
+for i = 1, num_games do
+    tex.print("\\item Nim piles:")
+    for heap = 1, #games[i] do
+        thisheap = nimtobin(games[i][heap])
+        tex.sprint(games[i][heap] .. " (")
+        for j = #thisheap,1,-1 do
+            tex.sprint(thisheap[j])
+        end
+        tex.sprint(") ")
+    end
+end
+tex.print("\\end{enumerate}")
+
 
 \end{luacode*}
 
