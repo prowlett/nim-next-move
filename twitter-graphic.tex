@@ -1,0 +1,27 @@
+\documentclass{extarticle}
+\usepackage[papersize={192px,108px},rmargin=10px,lmargin=10px,tmargin=20px,bmargin=45px]{geometry}
+\usepackage{nimsticks}
+\usepackage{xcolor}
+\definecolor{aliceblue}{rgb}{0.94, 0.97, 1.0} % https://latexcolor.com/
+
+\title{Nim --- graphic for tweeting}
+\author{Peter Rowlett}
+\date{November 2020}
+
+\begin{document}
+\pagestyle{plain}
+\pagenumbering{gobble}
+\pagecolor{aliceblue}
+
+\begin{center}
+\begin{minipage}{.9\textwidth}
+% using nim-next-move.tex with num_games = 1 and some code removed (heading, list, answers)
+What is the optimal next move in the following game of Nim?
+
+\nimgame{5,4,6}
+\end{minipage}
+\end{center}
+
+\end{document}
+
+
